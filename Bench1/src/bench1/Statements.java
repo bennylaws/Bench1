@@ -2,7 +2,7 @@ package bench1;
 
 public class Statements {
 	
-	String createDb[] = {	
+	static String createDb[] = {	
 	
 	// str0
 	"DROP DATABASE IF EXISTS bank;",
@@ -47,4 +47,16 @@ public class Statements {
 	+"foreign key (tellerid) references tellers(tellerid),"
 	+"foreign key (branchid) references branches (branchid));"
 	};
-}
+	
+	static String branches1 = "INSERT INTO branches VALUES ( ";
+	static String branches2 = ", 'nameMit20Buchstaben!', 0, "
+			+ "'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst');";
+			
+	static String tellers1 = "INSERT INTO tellers VALUES ( ";
+	static String tellers2 = ", 'nameMit20Buchstaben!', 0, ";
+	static String tellers3 = ", 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop');";
+	
+	static String accounts1 = "INSERT INTO accounts VALUES ( ";
+	static String accounts2 = ", 'nameMit20Buchstaben!', 0, ";
+	static String accounts3 = ", 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop');";
+	}

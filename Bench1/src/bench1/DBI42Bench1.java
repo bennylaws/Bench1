@@ -1,16 +1,24 @@
 package bench1;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
+import java.util.Scanner;
+
 
 public class DBI42Bench1 {
-
+	
 	public static void main(String[] args) {
 
-		// Statement-Strings aus Klasse Statements laden
-		Statements strings = new Statements();
+		Scanner scanner = new Scanner(System.in);
+		int n;
+		double start, stop, diff;
+		
+		System.out.print("Jetzt n eingeben: ");
+		n = scanner.nextInt();
+		scanner.close();
 		
 		Connection conni = null;
 		Statement stmt = null;
@@ -44,18 +52,21 @@ public class DBI42Bench1 {
 		}
 
 		System.out.println("Sehr verbunden");
+
+		Init.init(stmt);
 		
-		// in Schleife alle Einzel-Strings aus strings.xxxxxx ausfuehren
-		try {
-		    for (String str : strings.createDb) {
-			System.out.println(str);
-			stmt.executeUpdate(str);
-		    }
+		start = System.nanoTime();
+		
+		try{
+			Fill.fill(stmt, n);
 		}
-		catch (Exception e) {
-			System.out.println("Error...");
-			System.out.println(e);
+		catch(Exception e){
+			System.out.println("..naja");
+			System.err.println(e);
 		}
+		stop = System.nanoTime();
+		diff = stop-start;
+		System.out.println("Fertig, es hat "+ diff/1000000 + " ms gedauert");
 				
 		//Verbindung beenden, Programm verlassen
 		try{
@@ -63,6 +74,7 @@ public class DBI42Bench1 {
 		}
 		catch(Exception e){
 			System.out.println(e);
+			
 		}
 	}
 }
